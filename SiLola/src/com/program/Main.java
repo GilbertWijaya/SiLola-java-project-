@@ -1,12 +1,13 @@
 package com.program;
 
 import com.program.*;
+import com.templates.cDashboardFrame;
+import com.templates.cStartFrame;
 
 public class Main {
     public static void main(String[] args) {
         
-        System.out.println("halo bang");
-        System.out.println("dah siap ngoding nih bang");
+        Controller.showLoginUser();
 
     }
 }

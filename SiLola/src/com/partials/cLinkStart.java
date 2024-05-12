@@ -16,7 +16,7 @@ public class cLinkStart extends JLabel {
         setVerticalAlignment(JLabel.CENTER);
 
         setFont(cFonts.LINK_START_FONT);
-        setForeground(cColors.GREEN);
+        setForeground(cColors.WHITE);
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             

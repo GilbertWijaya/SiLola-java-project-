@@ -16,7 +16,7 @@ public class cFormLabel extends JLabel {
         setVerticalAlignment(JLabel.CENTER);
 
         setFont(cFonts.FORM_LABEL_FONT);
-        setForeground(cColors.BLACK);
+        setForeground(cColors.WHITE);
 
     }
 

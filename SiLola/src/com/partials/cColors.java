@@ -14,5 +14,7 @@ public class cColors {
     public static final Color WHITE_LABEL_APP = new Color(217,217,217);
     public static final Color BLUE_PANEL = new Color(32,138,161);
     public static final Color BLUE_TABLE_HEADER = new Color(142,177,218);
+    public static final Color GRAY = new Color(118, 118, 118);
 
 }
+
