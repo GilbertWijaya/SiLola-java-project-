@@ -1,5 +1,6 @@
 package com.program;
 
+import com.views.DashboardView;
 import com.views.StartView;
 
 public class Controller {
@@ -16,6 +17,13 @@ public class Controller {
         frameLoginDanDaftarUser.setVisible(false);
         frameLoginDanDaftarUser.initsDaftarUser();
         frameLoginDanDaftarUser.setVisible(true);
+    }
+
+    public static void showDashboard(Integer id){
+
+        DashboardView dashboardUser = new DashboardView(id);
+        dashboardUser.setVisible(true);
+
     }
 
 }
