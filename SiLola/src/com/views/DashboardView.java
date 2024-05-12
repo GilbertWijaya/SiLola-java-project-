@@ -1,5 +1,7 @@
 package com.views;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JOptionPane;
 
 import org.w3c.dom.events.MouseEvent;
@@ -38,80 +40,78 @@ public class DashboardView extends cDashboardFrame {
     private cLabelInfo labelTotalKas = new cLabelInfo("Total kas", 25, 280);
     private cBigFonts valueTotalKas = new cBigFonts("0", 25, 320);
 
-    private cLabelInfo labelJumlahTotalOmset = new cLabelInfo("Jumlah total omset", 495, 150);
-    private cBigFonts valueJumlahTotalOmset = new cBigFonts("0", 495, 190);
+    private cLabelInfo labelJumlahTotalOmset = new cLabelInfo("Jumlah total omset", 495, 20);
+    private cBigFonts valueJumlahTotalOmset = new cBigFonts("0", 495, 60);
 
-    private cLabelInfo labelJumlahBarangExpired = new cLabelInfo("Jumlah barang expired", 495, 280);
-    private cBigFonts valueJumlahBarangExpired = new cBigFonts("0", 495, 320);
+    private cLabelInfo labelJumlahBarangExpired = new cLabelInfo("Jumlah barang expired", 495, 150);
+    private cBigFonts valueJumlahBarangExpired = new cBigFonts("0", 495, 190);
 
-    private cGreenButton editKasButton = new cGreenButton("Edit kas",50,280,169);
+    private cGreenButton editKasButton = new cGreenButton("Edit kas",130,283,169);
 
     //komponent edit kas
-    private cFormLabel labelKas = new cFormLabel("Masukan jumlah dana kas baru",25,20,300,false);
+    private cFormLabel labelKas = new cFormLabel("Masukan jumlah dana kas baru",25,20,300,false,cColors.BLACK);
     private cTextFields txtEditKas = new cTextFields(25,60,300,false);
-    private cGreenButton btnEditKas = new cGreenButton("Simpan",25,100,170);
+    private cGreenButton btnEditKas = new cGreenButton("Simpan",840,470,110);
 
     //komponen keuangan
-    private cLabelInfo labelDataKeuangan = new cLabelInfo("Keuangan", 25, 20);
-    private cLabelInfo labelTotalDebet = new cLabelInfo("Total debet : ", 25, 660);
-    private cLabelInfo labelValueDebet = new cLabelInfo(" 0 ", 50, 660);
-    private cLabelInfo labelTotalKredit = new cLabelInfo("Total Kredit : ", 70, 660);
-    private cLabelInfo labelValueKredit = new cLabelInfo(" 0 " , 100, 660);
+    private cLabelInfo labelTotalDebet = new cLabelInfo("Total Debet : ", 25, 470);
+    private cLabelInfo labelValueDebet = new cLabelInfo(" 0 ", 155, 470);
+    private cLabelInfo labelTotalKredit = new cLabelInfo("Total Kredit : ", 300, 470);
+    private cLabelInfo labelValueKredit = new cLabelInfo(" 0 " , 430, 470);
     private cTable tblDataKeuangan;
     private cScrollPane spDataKeuangan;
-    private cGreenButton btnTambahDataKeuangan = new cGreenButton("tambah", 125, 660, 110);
-    private cGreenButton btnHapusDataKeuangan = new cGreenButton("Hapus", 250, 660, 110);
-    private cGreenButton btnEditDataKeuangan = new cGreenButton("Edit", 425, 660, 110);
+    private cGreenButton btnTambahDataKeuangan = new cGreenButton("tambah", 600, 470, 110);
+    private cGreenButton btnHapusDataKeuangan = new cGreenButton("Hapus", 720, 470, 110);
+    private cGreenButton btnEditDataKeuangan = new cGreenButton("Edit", 840, 470, 110);
 
-    //komponent edit kas
-    private cFormLabel labelTanggal = new cFormLabel("Masukan tanggal",25,20,300,false);
+    //komponent edit keuangan
+    private cFormLabel labelTanggal = new cFormLabel("Masukan tanggal",25,20,300,false,cColors.BLACK);
     private cTextFields txtEditTanggal = new cTextFields(25,60,300,false);
 
-    private cFormLabel labelJumlahUang = new cFormLabel("Masukan Jumlah uang",25,40,300,false);
-    private cTextFields txtEditJumlahUang = new cTextFields(25,120,300,false);
+    private cFormLabel labelJumlahUang = new cFormLabel("Masukan Jumlah uang",25,100,300,false,cColors.BLACK);
+    private cTextFields txtEditJumlahUang = new cTextFields(25,135,300,false);
 
-    private cRadioButton rdDebet = new cRadioButton("debet","debet",25, 145, 300);
-    private cRadioButton rdKredit = new cRadioButton("kredit","kredit",40, 145, 300);
+    private cRadioButton rdDebet = new cRadioButton("debet","Debet",25, 180, 80);
+    private cRadioButton rdKredit = new cRadioButton("kredit","Kredit",40, 180, 190);
     private javax.swing.ButtonGroup rdPilihanDebetKredit = new javax.swing.ButtonGroup();
 
-    private cFormLabel labelKeteranganSingkat = new cFormLabel("Masukan Keterangan singkat",25,165,300,false);
-    private cTextFields txtEditKeteranganSingkat = new cTextFields(25,185,300,false);
+    private cFormLabel labelKeteranganSingkat = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
+    private cTextFields txtEditKeteranganSingkat = new cTextFields(25,240,300,false);
 
-    private cGreenButton btnEditKeuangan = new cGreenButton("simpan",25,660,110);
+    private cGreenButton btnSimpanKeuangan = new cGreenButton("simpan",840,470,110);
 
     //komponen barang
-    private cLabelInfo labelDataBarang = new cLabelInfo("Keuangan", 25, 20);
-    private cLabelInfo labelTotalCash = new cLabelInfo("Total debet : ", 25, 660);
-    private cLabelInfo labelValuekCash = new cLabelInfo(" 0 ", 50, 660);
-    private cLabelInfo labelTotalKreditBrg = new cLabelInfo("Total Kredit : ", 70, 660);
-    private cLabelInfo labelValueKreditBrg = new cLabelInfo(" 0 " , 100, 660);
+    private cLabelInfo labelTotalCash = new cLabelInfo("Total Cash : ", 25, 470);
+    private cLabelInfo labelValueCash = new cLabelInfo(" 0 ", 155, 470);
+    private cLabelInfo labelTotalKreditBrg = new cLabelInfo("Total Kredit : ", 300, 470);
+    private cLabelInfo labelValueKreditBrg = new cLabelInfo(" 0 " , 430, 470);
     private cTable tblDataBarang;
     private cScrollPane spDataBarang;
-    private cGreenButton btnTambahDataBarang = new cGreenButton("tambah", 125, 660, 110);
-    private cGreenButton btnHapusDataBarang = new cGreenButton("Hapus", 250, 660, 110);
-    private cGreenButton btnEditDataBarang = new cGreenButton("Edit", 425, 660, 110);
+    private cGreenButton btnTambahDataBarang = new cGreenButton("tambah", 600, 470, 110);
+    private cGreenButton btnHapusDataBarang = new cGreenButton("Hapus", 720, 470, 110);
+    private cGreenButton btnEditDataBarang = new cGreenButton("Edit", 840, 470, 110);
 
     //komponent edit barang
-    private cFormLabel labelTanggalBrg = new cFormLabel("Masukan tanggal",25,20,300,false);
+    private cFormLabel labelTanggalBrg = new cFormLabel("Masukan tanggal",25,20,300,false,cColors.BLACK);
     private cTextFields txtEditTanggalBrg = new cTextFields(25,60,300,false);
 
-    private cFormLabel labelHargaBrg = new cFormLabel("Masukan harga satuan barang",620,20,300,false);
-    private cTextFields txtEditHargaBrg = new cTextFields(620,60,300,false);
+    private cFormLabel labelHargaBrg = new cFormLabel("Masukan harga satuan barang",400,20,300,false,cColors.BLACK);
+    private cTextFields txtEditHargaBrg = new cTextFields(400,60,300,false);
 
-    private cFormLabel labelNamaBarang = new cFormLabel("Masukan nama barang",25,40,300,false);
-    private cTextFields txtEditNamaBarang = new cTextFields(25,120,300,false);
+    private cFormLabel labelNamaBarang = new cFormLabel("Masukan nama barang",25,100,300,false,cColors.BLACK);
+    private cTextFields txtEditNamaBarang = new cTextFields(25,135,300,false);
 
-    private cFormLabel labelStokSatuan = new cFormLabel("Masukan jumlah stok satuan",620,40,300,false);
-    private cTextFields txtEditHargaBarang = new cTextFields(620,120,300,false);
+    private cFormLabel labelStokSatuan = new cFormLabel("Masukan jumlah stok satuan",400,100,300,false,cColors.BLACK);
+    private cTextFields txtEditStokBarang = new cTextFields(400,135,300,false);
 
-    private cRadioButton rdCash = new cRadioButton("cash","cash",25, 145, 300);
-    private cRadioButton rdKreditBrg = new cRadioButton("kredit","kredit",40, 145, 300);
+    private cRadioButton rdCash = new cRadioButton("cash","cash",25, 180, 80);
+    private cRadioButton rdKreditBrg = new cRadioButton("kredit","kredit",40, 180, 190);
     private javax.swing.ButtonGroup rdPilihanCashKredit = new javax.swing.ButtonGroup();
 
-    private cFormLabel labelKeteranganSingkatBrg = new cFormLabel("Masukan Keterangan singkat",25,165,300,false);
-    private cTextFields txtEditKeteranganSingkatBrg = new cTextFields(25,185,300,false);
+    private cFormLabel labelKeteranganSingkatBrg = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
+    private cTextFields txtEditKeteranganSingkatBrg = new cTextFields(25,240,300,false);
 
-    private cGreenButton btnEditBarang = new cGreenButton("simpan",25,660,110);
+    private cGreenButton btnEditBarang = new cGreenButton("simpan",840,470,110);
 
     //method reset sidebar
     private void resetSideBar(){
@@ -171,7 +171,7 @@ public class DashboardView extends cDashboardFrame {
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                //initsKeuangan();
+                initsKeuangan();
             }
 
         });
@@ -180,7 +180,7 @@ public class DashboardView extends cDashboardFrame {
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                //initsBarang();
+                initsBarang();
             }
 
         });
@@ -232,8 +232,226 @@ public class DashboardView extends cDashboardFrame {
         content.add(labelJumlahTotalBarang);
         content.add(valueJumlahTotalBarang);
         content.add(labelTotalKas);
+
         content.add(editKasButton); 
+        editKasButton.addActionListener(new java.awt.event.ActionListener() {
+           
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                initsEditKas();
+            }
+
+        });
+
         content.add(valueTotalKas);
+        content.add(labelJumlahTotalOmset);
+        content.add(valueJumlahTotalOmset);
+        content.add(labelJumlahBarangExpired);
+        content.add(valueJumlahBarangExpired);
+        setVisible(true);
+
+    }
+
+    public void initsEditKas(){
+
+        idSelected = null;
+        resetSideBar();
+        menuBeranda.setForeground(cColors.WHITE);
+        menuBeranda.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("beranda");
+
+        menuBeranda.setSideBarAktif();
+        content.add(labelKas);
+        content.add(txtEditKas);
+        content.add(btnEditKas);
+
+        setVisible(true);
+
+    }
+
+    private void initsKeuangan(){
+        idSelected = null;
+        resetSideBar();
+        menuKeuangan.setForeground(cColors.WHITE);
+        menuKeuangan.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("Keuangan");
+
+        menuKeuangan.setSideBarAktif();
+        content.add(labelTotalDebet); 
+        content.add(labelValueDebet);
+        content.add(labelTotalKredit);
+        content.add(labelValueKredit);
+        
+        content.add(btnTambahDataKeuangan);
+        btnTambahDataKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                initsTambahKeuangan();
+            }
+            
+        });
+
+        content.add(btnHapusDataKeuangan);
+
+        content.add(btnEditDataKeuangan);
+        btnEditDataKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                initsEditKeuangan();
+            }
+            
+        });
+
+        setVisible(true);
+
+    }
+    
+    private void initsTambahKeuangan(){
+
+        idSelected = null;
+        resetSideBar();
+        menuKeuangan.setForeground(cColors.WHITE);
+        menuKeuangan.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("Tambah data keuangan");
+
+        menuKeuangan.setSideBarAktif();
+        content.add(labelTanggal);
+        content.add(txtEditTanggal);
+        content.add(labelJumlahUang);
+        content.add(txtEditJumlahUang);
+        content.add(rdDebet);
+        content.add(rdKredit);
+        content.add(labelKeteranganSingkat);
+        content.add(txtEditKeteranganSingkat);
+        content.add(btnSimpanKeuangan);
+        setVisible(true);
+
+    }
+    
+    private void initsEditKeuangan(){
+
+        idSelected = null;
+        resetSideBar();
+        menuKeuangan.setForeground(cColors.WHITE);
+        menuKeuangan.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("Edit data keuangan");
+
+        menuKeuangan.setSideBarAktif();
+        content.add(labelTanggal);
+        content.add(txtEditTanggal);
+        content.add(labelJumlahUang);
+        content.add(txtEditJumlahUang);
+        content.add(rdDebet);
+        content.add(rdKredit);
+        content.add(labelKeteranganSingkat);
+        content.add(txtEditKeteranganSingkat);
+        content.add(btnSimpanKeuangan);
+        setVisible(true);
+    }
+
+    private void initsBarang(){
+
+        idSelected = null;
+        resetSideBar();
+        menuBarang.setForeground(cColors.WHITE);
+        menuBarang.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("Barang");
+
+        menuBarang.setSideBarAktif();
+        content.add(labelTotalCash);
+        content.add(labelValueCash);
+        content.add(labelTotalKredit);
+        content.add(labelValueKreditBrg);
+
+        content.add(btnTambahDataBarang);
+        btnTambahDataBarang.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                initsTambahBarang();
+            }
+
+        });
+
+        content.add(btnHapusDataBarang);
+
+        content.add(btnEditDataBarang);
+        btnEditDataBarang.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                initsTambahBarang();
+            }
+
+        });
+
+        setVisible(true);
+
+    }
+
+    private void initsTambahBarang(){
+
+        idSelected = null;
+        resetSideBar();
+        menuKeuangan.setForeground(cColors.WHITE);
+        menuKeuangan.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("Tambah data Barang");
+
+        menuKeuangan.setSideBarAktif();
+        content.add(labelTanggal);
+        content.add(txtEditTanggal);
+        content.add(labelHargaBrg);
+        content.add(txtEditHargaBrg);
+        content.add(labelNamaBarang);
+        content.add(txtEditNamaBarang);
+        content.add(labelStokSatuan);
+        content.add(txtEditStokBarang);
+        content.add(rdCash);
+        content.add(rdKreditBrg);
+        content.add(labelKeteranganSingkatBrg);
+        content.add(txtEditKeteranganSingkatBrg);
+        content.add(btnEditBarang);
+        setVisible(true);
+
+    }
+
+    private void initsEditBarang(){
+
+        idSelected = null;
+        resetSideBar();
+        menuKeuangan.setForeground(cColors.WHITE);
+        menuKeuangan.setBackground(cColors.RED);
+        refreshContent();
+
+        menuTitle.setText("Edit data Barang");
+        menuKeuangan.setSideBarAktif();
+        content.add(labelTanggal);
+        content.add(txtEditTanggal);
+        content.add(labelHargaBrg);
+        content.add(txtEditHargaBrg);
+        content.add(labelNamaBarang);
+        content.add(txtEditNamaBarang);
+        content.add(labelStokSatuan);
+        content.add(txtEditStokBarang);
+        content.add(rdCash);
+        content.add(rdKreditBrg);
+        content.add(labelKeteranganSingkatBrg);
+        content.add(txtEditKeteranganSingkatBrg);
+        content.add(btnEditBarang);
         setVisible(true);
 
     }

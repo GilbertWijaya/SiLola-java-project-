@@ -67,13 +67,13 @@ public abstract class cDashboardFrame extends JFrame {
         menuTitle.setBounds(30, 10,600, 50);
         //menuTitle.setHorizontalAlignment(JLabel.CENTER);
         menuTitle.setVerticalAlignment(JLabel.CENTER);
-        menuTitle.setForeground(cColors.BLACK);
+        menuTitle.setForeground(cColors.WHITE);
 
         CRText.setFont(cFonts.TEXTFIELD_FONT);
         CRText.setBounds(0, 610,1050, 20);
         CRText.setHorizontalAlignment(JLabel.CENTER);
         CRText.setVerticalAlignment(JLabel.CENTER);
-        CRText.setForeground(cColors.GRAY);
+        CRText.setForeground(cColors.WHITE);
 
         appTitle.add(appText);
 
