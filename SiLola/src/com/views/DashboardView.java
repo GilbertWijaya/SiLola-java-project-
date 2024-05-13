@@ -21,7 +21,7 @@ import com.templates.cDashboardFrame;
 
 public class DashboardView extends cDashboardFrame {
 
-    Integer idCustomer = null;
+    Integer idUser = null;
     Integer idSelected = null;
 
     //sidebar menu
@@ -144,7 +144,9 @@ public class DashboardView extends cDashboardFrame {
     private void refreshContent(){
         
         try {
-            //RoleText.setText("Customer | " + Model.getDetailCustomer(idCustomer)[1].toString());
+            String nama = Model.getDetailUser(idUser)[1].toString();
+            String jabatan = Model.getDetailUser(idUser)[2].toString();
+            RoleText.setText(nama + " | " + jabatan);
             content.removeAll();
         } catch (Exception e) {
             e.printStackTrace();
@@ -155,8 +157,12 @@ public class DashboardView extends cDashboardFrame {
     public DashboardView(Integer id){
 
         super("Dashboard User");
-        this.idCustomer = id;
-        //RoleText.setText("Customer | " + Model.getDetailCustomer(idCustomer)[1].toString());
+        this.idUser = id;
+
+        String nama = Model.getDetailUser(idUser)[1].toString();
+        String jabatan = Model.getDetailUser(idUser)[2].toString();
+
+        RoleText.setText(nama + " | " + jabatan);
 
         menuBeranda.addMouseListener(new java.awt.event.MouseAdapter() {
 
@@ -194,7 +200,7 @@ public class DashboardView extends cDashboardFrame {
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
                 null, options, options[0]);
                 if(confirm == 0 ){
-                  idCustomer = null;
+                  idUser = null;
                   idSelected = null;
                   com.program.Controller.showLoginUser();
                 }
@@ -225,6 +231,11 @@ public class DashboardView extends cDashboardFrame {
         refreshContent();
 
         menuTitle.setText("beranda");
+
+        valueJumlahItemBarang.setText(String.valueOf(Model.getCountAllBrg()));
+        valueJumlahTotalBarang.setText(String.valueOf(Model.getCountAllTotalBrg()));
+        valueJumlahBarangExpired.setText(String.valueOf(Model.getCountExpBrgAktif()));
+        valueTotalKas.setText(String.valueOf(Model.getDetailUser(idUser)[3]));
 
         menuBeranda.setSideBarAktif();
         content.add(labelJumlahItemBarang);
@@ -262,6 +273,32 @@ public class DashboardView extends cDashboardFrame {
 
         menuTitle.setText("beranda");
 
+        btnEditKas.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                double totalKas = Double.valueOf(txtEditKas.getText());
+
+                if (totalKas == 0) {
+                    JOptionPane.showMessageDialog(DashboardView.this,"Isi jumlah kas terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                }else{
+                    
+                    if (Model.editKas(totalKas, idUser)) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Berhasil mengubah jumlah kas","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        //valueTotalKas.setText(String.valueOf(totalKas));
+                        initsBeranda();
+                    }
+                    else{
+                    JOptionPane.showMessageDialog(DashboardView.this,"Error dalam mengubah kas","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    
+                }
+
+            }
+            
+        });
+
         menuBeranda.setSideBarAktif();
         content.add(labelKas);
         content.add(txtEditKas);
@@ -280,11 +317,24 @@ public class DashboardView extends cDashboardFrame {
 
         menuTitle.setText("Keuangan");
 
+        tblDataKeuangan = new cTable(Model.getAllDataKeuangan());
+        tblDataKeuangan.getColumnModel().getColumn(0).setMinWidth(0);
+        tblDataKeuangan.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblDataKeuangan.getColumnModel().getColumn(0).setWidth(0);
+
+        tblDataKeuangan.getColumnModel().getColumn(5).setMinWidth(0);
+        tblDataKeuangan.getColumnModel().getColumn(5).setMaxWidth(0);
+        tblDataKeuangan.getColumnModel().getColumn(5).setWidth(0);
+
+
+        spDataKeuangan = new cScrollPane(tblDataKeuangan,25, 65, 740, 310);
+
         menuKeuangan.setSideBarAktif();
         content.add(labelTotalDebet); 
         content.add(labelValueDebet);
         content.add(labelTotalKredit);
         content.add(labelValueKredit);
+        content.add(spDataKeuangan);
         
         content.add(btnTambahDataKeuangan);
         btnTambahDataKeuangan.addActionListener(new java.awt.event.ActionListener() {
@@ -375,6 +425,18 @@ public class DashboardView extends cDashboardFrame {
         content.add(labelTotalKredit);
         content.add(labelValueKreditBrg);
 
+        tblDataBarang = new cTable(Model.getAllDataBrg());
+        tblDataBarang.getColumnModel().getColumn(0).setMinWidth(0);
+        tblDataBarang.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblDataBarang.getColumnModel().getColumn(0).setWidth(0);
+
+        tblDataBarang.getColumnModel().getColumn(7).setMinWidth(0);
+        tblDataBarang.getColumnModel().getColumn(7).setMaxWidth(0);
+        tblDataBarang.getColumnModel().getColumn(7).setWidth(0);
+
+        spDataBarang = new cScrollPane(tblDataBarang, 25, 65, 740, 310);
+
+        content.add(spDataBarang);
         content.add(btnTambahDataBarang);
         btnTambahDataBarang.addActionListener(new java.awt.event.ActionListener() {
             

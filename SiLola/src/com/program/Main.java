@@ -7,7 +7,7 @@ import com.templates.cStartFrame;
 public class Main {
     public static void main(String[] args) {
         
-        Controller.showDashboard(1);
+        Controller.showDashboard(2);
 
     }
 }
