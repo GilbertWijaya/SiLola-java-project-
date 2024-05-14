@@ -92,8 +92,8 @@ public class DashboardView extends cDashboardFrame {
     private cGreenButton btnEditDataBarang = new cGreenButton("Edit", 840, 470, 110);
 
     //komponent edit barang
-    private cFormLabel labelTanggalBrg = new cFormLabel("Masukan tanggal",25,20,300,false,cColors.BLACK);
-    private cTextFields txtEditTanggalBrg = new cTextFields(25,60,300,false);
+    private cFormLabel labelTanggalEXPBrg = new cFormLabel("Masukan expired",25,20,300,false,cColors.BLACK);
+    private cTextFields txtEditTanggalEXPBrg = new cTextFields(25,60,300,false);
 
     private cFormLabel labelHargaBrg = new cFormLabel("Masukan harga satuan barang",400,20,300,false,cColors.BLACK);
     private cTextFields txtEditHargaBrg = new cTextFields(400,60,300,false);
@@ -111,7 +111,7 @@ public class DashboardView extends cDashboardFrame {
     private cFormLabel labelKeteranganSingkatBrg = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
     private cTextFields txtEditKeteranganSingkatBrg = new cTextFields(25,240,300,false);
 
-    private cGreenButton btnEditBarang = new cGreenButton("simpan",840,470,110);
+    private cGreenButton btnSimpanBarang = new cGreenButton("simpan",840,470,110);
 
     //method reset sidebar
     private void resetSideBar(){
@@ -375,6 +375,56 @@ public class DashboardView extends cDashboardFrame {
 
         menuTitle.setText("Tambah data keuangan");
 
+        btnSimpanKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (/*txtEditTanggal.getText().trim().isEmpty() ||*/ txtEditJumlahUang.getText().trim().isEmpty()
+                || rdPilihanDebetKredit.getSelection().getActionCommand().equals(null) || txtEditKeteranganSingkat.getText().trim().isEmpty() ) {
+                    
+                    DashboardView.this.setVisible(false);
+
+                    // if (txtEditTanggal.getText().trim().isEmpty()) {
+                    //     JOptionPane.showMessageDialog(DashboardView.this,"Masukan tanggal terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    // }
+
+                    if (txtEditJumlahUang.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan jumlah uang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    if (rdPilihanDebetKredit.getSelection().getActionCommand().equals(null)) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan pilihan terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    if (txtEditKeteranganSingkat.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan pilihan terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    DashboardView.this.setVisible(true);
+
+                }
+                else{
+
+                    //String tanggal = txtEditTanggal.getText();
+                    int jumlahUang = Integer.parseInt(txtEditJumlahUang.getText());
+                    String keteranganSingkat = txtEditKeteranganSingkat.getText();
+                    String pilihanDebetKredit = rdPilihanDebetKredit.getSelection().getActionCommand();
+
+                    if (Model.tambahDataKeuangan(jumlahUang, keteranganSingkat, pilihanDebetKredit)) {
+                        JOptionPane.showMessageDialog(DashboardView.this," Data berhasil ditambahkan","berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        initsKeuangan();
+                    }else{
+                        JOptionPane.showMessageDialog(DashboardView.this,"Data gagal ditambahkan","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+
+
+            }
+
+        });
+
         menuKeuangan.setSideBarAktif();
         content.add(labelTanggal);
         content.add(txtEditTanggal);
@@ -479,9 +529,65 @@ public class DashboardView extends cDashboardFrame {
 
         menuTitle.setText("Tambah data Barang");
 
+        btnSimpanBarang.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (txtEditHargaBrg.getText().trim().isEmpty() || txtEditNamaBarang.getText().trim().isEmpty()
+                || txtEditStokBarang.getText().trim().isEmpty() || txtEditTanggalEXPBrg.getText().trim().isEmpty()
+                || txtEditKeteranganSingkatBrg.getText().trim().isEmpty() || rdPilihanCashKredit.getSelection().getActionCommand().equals(null)) {
+                    
+                    DashboardView.this.setVisible(false);
+
+                    if (txtEditTanggalEXPBrg.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan Expired barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditHargaBrg.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan harga barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditNamaBarang.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan nama barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditStokBarang.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan stok barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan keterangan barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (rdPilihanCashKredit.getSelection().getActionCommand().equals(null)) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Masukan harga barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    DashboardView.this.setVisible(true);
+                }
+                else{
+
+                    String namaBrg = txtEditNamaBarang.getText();
+                    String expiredBrg = txtEditTanggalEXPBrg.getText();
+                    int hargaBrg = Integer.parseInt(txtEditHargaBrg.getText());
+                    int stokBrg = Integer.parseInt(txtEditStokBarang.getText());
+                    String keteranganSingkatBrg = txtEditKeteranganSingkatBrg.getText();
+                    String pilihanCashKredit = rdPilihanCashKredit.getSelection().getActionCommand();
+                    int totalbrg = hargaBrg * stokBrg;
+
+                    if (Model.tambahDataBarang(namaBrg, hargaBrg, expiredBrg, stokBrg, pilihanCashKredit, totalbrg, keteranganSingkatBrg)) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Data barang berhasil ditambahkan","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        initsBarang();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(DashboardView.this, "Data barang berhasil ditambahkan","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+
+                    }
+
+                }
+                
+            }
+
+        });
+
         menuKeuangan.setSideBarAktif();
-        content.add(labelTanggal);
-        content.add(txtEditTanggal);
+        content.add(labelTanggalEXPBrg);
+        content.add(txtEditTanggalEXPBrg);
         content.add(labelHargaBrg);
         content.add(txtEditHargaBrg);
         content.add(labelNamaBarang);
@@ -492,7 +598,7 @@ public class DashboardView extends cDashboardFrame {
         content.add(rdKreditBrg);
         content.add(labelKeteranganSingkatBrg);
         content.add(txtEditKeteranganSingkatBrg);
-        content.add(btnEditBarang);
+        content.add(btnSimpanBarang);
         setVisible(true);
 
     }
@@ -519,7 +625,7 @@ public class DashboardView extends cDashboardFrame {
         content.add(rdKreditBrg);
         content.add(labelKeteranganSingkatBrg);
         content.add(txtEditKeteranganSingkatBrg);
-        content.add(btnEditBarang);
+        content.add(btnSimpanBarang);
         setVisible(true);
 
     }

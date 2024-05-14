@@ -324,4 +324,54 @@ public class Model {
         return count;
     }
 
+    public static boolean tambahDataKeuangan(int jumlahUang,String ketSingkat,String pilihanDebetKredit){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "INSERT INTO `tbl_keuangan` VALUES( " + null + ",NOW()," + jumlahUang + ",'" + pilihanDebetKredit + "'," + "'" + ketSingkat + "'," + 1 + ")";
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+
+            stmt.close();
+            conn.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    public static boolean tambahDataBarang(String namaBrg,int hargaBrg,String expiredBrg,int stokBrg,String rdPilihanCashKredit,int totalbrg,String keteranganSingkatBrg){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "INSERT INTO `tbl_barang` VALUES( " + null + ",NOW(),'" + namaBrg + "'," + hargaBrg + ","  + "'" +expiredBrg + "'" + "," + stokBrg + ",'" + rdPilihanCashKredit + "'," + totalbrg + ",'" + keteranganSingkatBrg + "'," + "'1'" + ")";
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+
+            stmt.close();
+            conn.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
 }
