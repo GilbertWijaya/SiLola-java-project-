@@ -218,4 +218,110 @@ public class Model {
         return tm;
     }
 
+    public static int getJumlahKeuDebet(){
+
+        connection();
+        int count = 0;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT SUM(`jumlah_uang`) FROM `vwkeudebetaktif`";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            count = rs.getInt(1);
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public static int getJumlahKeuKredit(){
+
+        connection();
+        int count = 0;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT SUM(`jumlah_uang`) FROM `vwkeukreditaktif`";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            count = rs.getInt(1);
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public static int getTotalBrgCash(){
+
+        connection();
+        int count = 0;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT SUM(`total_barang`) FROM `vwbrgcashaktif`";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            count = rs.getInt(1);
+
+            stmt.close();
+            conn.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
+    public static int getTotalBrgKredit(){
+
+        connection();
+        int count = 0;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT SUM(`total_barang`) FROM `vwbrgkreditaktif`";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            count = rs.getInt(1);
+
+            stmt.close();
+            conn.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+
 }

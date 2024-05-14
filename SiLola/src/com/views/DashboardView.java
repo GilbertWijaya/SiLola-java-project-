@@ -55,7 +55,7 @@ public class DashboardView extends cDashboardFrame {
 
     //komponen keuangan
     private cLabelInfo labelTotalDebet = new cLabelInfo("Total Debet : ", 25, 470);
-    private cLabelInfo labelValueDebet = new cLabelInfo(" 0 ", 155, 470);
+    private cLabelInfo labelValueDebet = new cLabelInfo(" 0 ", 163, 470);
     private cLabelInfo labelTotalKredit = new cLabelInfo("Total Kredit : ", 300, 470);
     private cLabelInfo labelValueKredit = new cLabelInfo(" 0 " , 430, 470);
     private cTable tblDataKeuangan;
@@ -84,7 +84,7 @@ public class DashboardView extends cDashboardFrame {
     private cLabelInfo labelTotalCash = new cLabelInfo("Total Cash : ", 25, 470);
     private cLabelInfo labelValueCash = new cLabelInfo(" 0 ", 155, 470);
     private cLabelInfo labelTotalKreditBrg = new cLabelInfo("Total Kredit : ", 300, 470);
-    private cLabelInfo labelValueKreditBrg = new cLabelInfo(" 0 " , 430, 470);
+    private cLabelInfo labelValueKreditBrg = new cLabelInfo(" 0 " , 435, 470);
     private cTable tblDataBarang;
     private cScrollPane spDataBarang;
     private cGreenButton btnTambahDataBarang = new cGreenButton("tambah", 600, 470, 110);
@@ -329,6 +329,9 @@ public class DashboardView extends cDashboardFrame {
 
         spDataKeuangan = new cScrollPane(tblDataKeuangan,25, 65, 740, 310);
 
+        labelValueDebet.setText(String.valueOf(Model.getJumlahKeuDebet()));
+        labelValueKredit.setText(String.valueOf(Model.getJumlahKeuKredit()));
+
         menuKeuangan.setSideBarAktif();
         content.add(labelTotalDebet); 
         content.add(labelValueDebet);
@@ -419,6 +422,9 @@ public class DashboardView extends cDashboardFrame {
 
         menuTitle.setText("Barang");
 
+        labelValueCash.setText(String.valueOf(Model.getTotalBrgCash()));
+        labelValueKreditBrg.setText(String.valueOf(Model.getTotalBrgKredit()));
+
         menuBarang.setSideBarAktif();
         content.add(labelTotalCash);
         content.add(labelValueCash);
@@ -430,9 +436,9 @@ public class DashboardView extends cDashboardFrame {
         tblDataBarang.getColumnModel().getColumn(0).setMaxWidth(0);
         tblDataBarang.getColumnModel().getColumn(0).setWidth(0);
 
-        tblDataBarang.getColumnModel().getColumn(7).setMinWidth(0);
-        tblDataBarang.getColumnModel().getColumn(7).setMaxWidth(0);
-        tblDataBarang.getColumnModel().getColumn(7).setWidth(0);
+        tblDataBarang.getColumnModel().getColumn(9).setMinWidth(0);
+        tblDataBarang.getColumnModel().getColumn(9).setMaxWidth(0);
+        tblDataBarang.getColumnModel().getColumn(9).setWidth(0);
 
         spDataBarang = new cScrollPane(tblDataBarang, 25, 65, 740, 310);
 
