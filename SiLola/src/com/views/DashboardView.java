@@ -1,6 +1,7 @@
 package com.views;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
@@ -71,8 +72,8 @@ public class DashboardView extends cDashboardFrame {
     private cFormLabel labelJumlahUang = new cFormLabel("Masukan Jumlah uang",25,100,300,false,cColors.BLACK);
     private cTextFields txtEditJumlahUang = new cTextFields(25,135,300,false);
 
-    private cRadioButton rdDebet = new cRadioButton("debet","Debet",25, 180, 80);
-    private cRadioButton rdKredit = new cRadioButton("kredit","Kredit",40, 180, 190);
+    private cRadioButton rdDebet = new cRadioButton("Debet","debet",25, 180, 80);
+    private cRadioButton rdKredit = new cRadioButton("Kredit","kredit",40, 180, 190);
     private javax.swing.ButtonGroup rdPilihanDebetKredit = new javax.swing.ButtonGroup();
 
     private cFormLabel labelKeteranganSingkat = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
@@ -317,7 +318,20 @@ public class DashboardView extends cDashboardFrame {
 
         menuTitle.setText("Keuangan");
 
+
         tblDataKeuangan = new cTable(Model.getAllDataKeuangan());
+
+        tblDataKeuangan.addMouseListener(new java.awt.event.MouseAdapter() {
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                int selectedIndex = tblDataKeuangan.getSelectedRow();
+                int idKeuangan = Integer.parseInt(tblDataKeuangan.getValueAt(selectedIndex, 0).toString());
+                
+            }
+
+        });
+
         tblDataKeuangan.getColumnModel().getColumn(0).setMinWidth(0);
         tblDataKeuangan.getColumnModel().getColumn(0).setMaxWidth(0);
         tblDataKeuangan.getColumnModel().getColumn(0).setWidth(0);
@@ -350,13 +364,50 @@ public class DashboardView extends cDashboardFrame {
         });
 
         content.add(btnHapusDataKeuangan);
+        btnHapusDataKeuangan.addActionListener(new java.awt.event.ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                int selectedIndex = tblDataKeuangan.getSelectedRow();
 
+                if (selectedIndex != -1) {
+
+                    int idKeuangan = Integer.parseInt(tblDataKeuangan.getValueAt(selectedIndex, 0).toString());
+
+                    if (Model.hapusDataKeuangan(idKeuangan)) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Berhasil menghapus data","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        initsKeuangan();   
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(DashboardView.this, "Pilih tabel terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(DashboardView.this, "Pilih tabel terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+
+        });
+        
         content.add(btnEditDataKeuangan);
         btnEditDataKeuangan.addActionListener(new java.awt.event.ActionListener() {
             
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                initsEditKeuangan();
+                
+                int selectedIndex = tblDataKeuangan.getSelectedRow();
+                
+                if (selectedIndex == -1) {
+                    JOptionPane.showMessageDialog(DashboardView.this,"Pilih data terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    int idKeuangan = Integer.parseInt(tblDataKeuangan.getValueAt(selectedIndex, 0).toString());
+                    initsEditKeuangan(idKeuangan);
+                }
+                
             }
             
         });
@@ -439,7 +490,7 @@ public class DashboardView extends cDashboardFrame {
 
     }
     
-    private void initsEditKeuangan(){
+    private void initsEditKeuangan(int id_keuangan){
 
         idSelected = null;
         resetSideBar();
@@ -448,7 +499,61 @@ public class DashboardView extends cDashboardFrame {
         refreshContent();
 
         menuTitle.setText("Edit data keuangan");
+        
+        Object[] detailKeuangan = Model.getDetailKeuangan(id_keuangan);
 
+        txtEditTanggal.setText(detailKeuangan[1].toString());
+        txtEditJumlahUang.setText(detailKeuangan[2].toString());
+        //rdPilihanDebetKredit.getSelection().setActionCommand(detailKeuangan[3].toString());
+        txtEditKeteranganSingkat.setText(detailKeuangan[4].toString());
+
+        btnSimpanKeuangan.addActionListener(new java.awt.event.ActionListener() {
+           
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (txtEditJumlahUang.getText().trim().isEmpty() || txtEditTanggal.getText().trim().isEmpty()
+                || /*rdPilihanDebetKredit.getSelection().equals()*/  txtEditKeteranganSingkat.getText().trim().isEmpty() ) {
+                    
+                    DashboardView.this.setVisible(false);
+
+                    if (txtEditJumlahUang.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan jumlah uang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditTanggal.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan tanggal terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    // if (rdPilihanDebetKredit.getSelection().equals("")) {
+                    //     JOptionPane.showMessageDialog(DashboardView.this, "Masukan pilihan terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    // }
+                    if (txtEditKeteranganSingkat.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan keterangan singkat terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                    DashboardView.this.setVisible(true);
+                    
+                }
+                else{
+
+                    String tanggal = txtEditTanggal.getText();
+                    int jumlahUang = Integer.parseInt(txtEditJumlahUang.getText());
+                    String pilihan = rdPilihanDebetKredit.getSelection().getActionCommand();
+                    String keteranganSingkat = txtEditKeteranganSingkat.getText();
+                    //System.out.println(pilihan);
+                    if (Model.ubahDataKeuangan(id_keuangan,pilihan, jumlahUang, keteranganSingkat)) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Ubah data berhasil","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        initsKeuangan();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(DashboardView.this, "Ubah data gagal","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+
+            }
+
+        });        
+        
         menuKeuangan.setSideBarAktif();
         content.add(labelTanggal);
         content.add(txtEditTanggal);
@@ -482,6 +587,18 @@ public class DashboardView extends cDashboardFrame {
         content.add(labelValueKreditBrg);
 
         tblDataBarang = new cTable(Model.getAllDataBrg());
+
+        tblDataBarang.addMouseListener(new java.awt.event.MouseAdapter() {
+            
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                int selectedIndex = tblDataBarang.getSelectedRow();
+                int idKeuangan = Integer.valueOf(tblDataBarang.getValueAt(selectedIndex,0).toString());
+                //System.out.println(selectedIndex);
+            }
+            
+        });
+
         tblDataBarang.getColumnModel().getColumn(0).setMinWidth(0);
         tblDataBarang.getColumnModel().getColumn(0).setMaxWidth(0);
         tblDataBarang.getColumnModel().getColumn(0).setWidth(0);
@@ -504,13 +621,51 @@ public class DashboardView extends cDashboardFrame {
         });
 
         content.add(btnHapusDataBarang);
+        btnHapusDataBarang.addActionListener(new java.awt.event.ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                int selectedIndex = tblDataBarang.getSelectedRow();
+
+                if (selectedIndex != -1) {
+                    
+                    int idBarang = Integer.parseInt(tblDataBarang.getValueAt(selectedIndex,0).toString());
+
+                    if (Model.hapusDataBarang(idBarang)) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Data barang berhasil dihapus","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        initsBarang();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(DashboardView.this, "Data barang gagal dihapus","Gagal",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+                else{
+
+                }
+
+            }
+
+        });
 
         content.add(btnEditDataBarang);
         btnEditDataBarang.addActionListener(new java.awt.event.ActionListener() {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-                initsTambahBarang();
+                
+                int selectedIndex = tblDataBarang.getSelectedRow();
+                //System.out.println(selectedIndex);
+
+                if (selectedIndex == -1) {
+                    JOptionPane.showMessageDialog(DashboardView.this, "Pilih tabel terlebih dahulu","Error",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    int idBarang = Integer.parseInt(tblDataBarang.getValueAt(selectedIndex,0).toString());
+                    initsEditBarang(idBarang);
+                }
+
             }
 
         });
@@ -603,7 +758,7 @@ public class DashboardView extends cDashboardFrame {
 
     }
 
-    private void initsEditBarang(){
+    private void initsEditBarang(int idBarang){
 
         idSelected = null;
         resetSideBar();
@@ -612,9 +767,69 @@ public class DashboardView extends cDashboardFrame {
         refreshContent();
 
         menuTitle.setText("Edit data Barang");
+
+        Object[] dataBarang = Model.getDetailBarang(idBarang);
+
+        txtEditTanggalEXPBrg.setText(dataBarang[4].toString());
+        txtEditHargaBrg.setText(dataBarang[3].toString());
+        txtEditNamaBarang.setText(dataBarang[2].toString());
+        txtEditStokBarang.setText(dataBarang[5].toString());
+        txtEditKeteranganSingkatBrg.setText(dataBarang[8].toString());
+
+        btnSimpanBarang.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if (txtEditNamaBarang.getText().trim().isEmpty() || txtEditTanggalEXPBrg.getText().trim().isEmpty()
+                || txtEditStokBarang.getText().trim().isEmpty() || txtEditHargaBrg.getText().trim().isEmpty()
+                || txtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
+                    
+                    DashboardView.this.setVisible(false);
+
+                    if (txtEditNamaBarang.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan nama barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditTanggalEXPBrg.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan tanggal expired terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditStokBarang.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan Stok barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditHargaBrg.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan harga barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    if (txtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(DashboardView.this, "Masukan keterangan singkat barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
+                    }
+                    DashboardView.this.setVisible(true);
+
+                }
+                else{
+
+                    String nama = txtEditNamaBarang.getText();
+                    String expired = txtEditTanggalEXPBrg.getText();
+                    int harga = Integer.parseInt(txtEditHargaBrg.getText());
+                    int stok = Integer.parseInt(txtEditStokBarang.getText());
+                    String keteranganSingkat = txtEditKeteranganSingkatBrg.getText();
+
+                    if (Model.ubahDataBarang(idBarang,nama,expired,harga,stok,keteranganSingkat)) {
+                        JOptionPane.showMessageDialog(DashboardView.this,"Data barang berhasil diubah","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        initsBarang();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(DashboardView.this,"Data barang gagal diubah","Gagal",JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                }
+
+            }
+            
+        });
+
         menuKeuangan.setSideBarAktif();
-        content.add(labelTanggal);
-        content.add(txtEditTanggal);
+        content.add(labelTanggalEXPBrg);
+        content.add(txtEditTanggalEXPBrg);
         content.add(labelHargaBrg);
         content.add(txtEditHargaBrg);
         content.add(labelNamaBarang);

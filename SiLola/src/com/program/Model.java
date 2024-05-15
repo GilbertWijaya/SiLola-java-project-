@@ -374,4 +374,165 @@ public class Model {
         return status;
     }
 
+    public static Object[] getDetailKeuangan(int id_keuangan){
+
+        connection();
+        Object[] rowData = new Object[6];
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM tbl_keuangan WHERE id_keuangan = " + id_keuangan;
+
+            ResultSet resultData = stmt.executeQuery(query);
+
+            resultData.next();
+
+            rowData[0] = resultData.getInt("id_keuangan");
+            rowData[1] = resultData.getString("tanggal");
+            rowData[2] = resultData.getInt("jumlah_uang");
+            rowData[3] = resultData.getString("debet_kredit");
+            rowData[4] = resultData.getString("keterangan_singkat");
+            rowData[5] = resultData.getString("s_aktif_keu");
+
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rowData;
+    }
+
+    public static boolean ubahDataKeuangan(int selectedIndex,String pilihan,int jumlah,String ketSingkat){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "UPDATE `tbl_keuangan` SET tanggal = NOW(),`jumlah_uang` = " + jumlah + ",`debet_kredit` = '" + pilihan+"',`keterangan_singkat` = '" + ketSingkat+"' WHERE `id_keuangan` = " + selectedIndex;
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    public static Object[] getDetailBarang(int idBarang){
+
+        connection();
+        Object[] rowData = new Object[10];
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM tbl_barang WHERE id_barang = " + idBarang;
+
+            ResultSet resultData = stmt.executeQuery(query);
+
+            resultData.next();
+
+            rowData[0] = resultData.getInt("id_barang");
+            rowData[1] = resultData.getString("tanggal");
+            rowData[2] = resultData.getString("nama_barang");
+            rowData[3] = resultData.getInt("harga_satuan");
+            rowData[4] = resultData.getString("expired_brg");
+            rowData[5] = resultData.getInt("stok_satuan");
+            rowData[6] = resultData.getString("cash_kredit");
+            rowData[7] = resultData.getInt("total_barang");
+            rowData[8] = resultData.getString("keterangan_singkat");
+            rowData[9] = resultData.getString("s_aktif_brg");
+
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rowData;
+    }
+
+    public static boolean ubahDataBarang(int idBarang,String nama,String expired,int harga,int stok,String ketSingkat){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "UPDATE `tbl_barang` SET tanggal = NOW(),`nama_barang` = '" + nama + "',`harga_satuan` = " + harga + ",`expired_brg` = '" + expired + "',`stok_satuan` = " + stok + ",`keterangan_singkat` = '" + ketSingkat + "' WHERE `id_barang` = " + idBarang;
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    public static boolean hapusDataKeuangan(int idKeuangan){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "UPDATE tbl_keuangan SET s_aktif_keu = '0' WHERE id_keuangan = " + idKeuangan ;
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    public static boolean hapusDataBarang(int idBarang){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "UPDATE tbl_barang SET s_aktif_brg = '0' WHERE id_barang = " + idBarang ;
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
 }
