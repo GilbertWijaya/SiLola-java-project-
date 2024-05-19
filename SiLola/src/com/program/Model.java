@@ -32,23 +32,25 @@ public class Model {
     public static Object[] getDetailUser(int id){
 
         connection();
-        Object[] data = new Object[5];
+        Object[] rowData = new Object[7];
 
         try {
             
             stmt = conn.createStatement();
 
-            String query = "SELECT* FROM vwuseraktif WHERE id_user = " + id;
+            String query = "SELECT * FROM vwuseraktif WHERE id_user = " + id;
 
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet resultData = stmt.executeQuery(query);
 
-            rs.next();
+            resultData.next();
 
-            data[0] = rs.getString("id_user");
-            data[1] = rs.getString("nama_user");
-            data[2] = rs.getString("jabatan_user");
-            data[3] = rs.getString("total_kas_user");
-            data[4] = rs.getString("s_aktif_user");
+            rowData[0] = resultData.getInt("id_user");
+            rowData[1] = resultData.getString("nama_user");
+            rowData[2] = resultData.getString("password");
+            rowData[3] = resultData.getString("no_warga_user");
+            rowData[4] = resultData.getString("jabatan_user");
+            rowData[5] = resultData.getString("total_kas_user");
+            rowData[6] = resultData.getString("s_aktif_user");
 
             stmt.close();
             conn.close();
@@ -58,7 +60,7 @@ public class Model {
             e.printStackTrace();
         }
 
-        return data;
+        return rowData;
     }
 
     public static int getCountAllBrg(){
@@ -161,7 +163,7 @@ public class Model {
     public static DefaultTableModel getAllDataKeuangan(){
 
         connection();
-        String[] dataHeader = {"id keuangan","tanggal","jumlah uang","debet/kredit","keterangan singkat","status aktif"};
+        String[] dataHeader = {"id keuangan","tanggal entry","jumlah uang","debet/kredit","keterangan singkat","status aktif"};
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
 
         try {
@@ -191,7 +193,7 @@ public class Model {
     public static DefaultTableModel getAllDataBrg(){
 
         connection();
-        String[] dataHeader = {"id barang","tanggal","nama barang","harga satuan","expired barang","stok satuan","cash/kredit","total barang","keterangan singkat","status aktif"};
+        String[] dataHeader = {"id barang","tanggal entry","nama barang","harga satuan","expired barang","stok satuan","cash/kredit","total barang","keterangan singkat","status aktif"};
         DefaultTableModel tm = new DefaultTableModel(null, dataHeader);
 
         try {
@@ -534,5 +536,120 @@ public class Model {
 
         return status;
     }
+
+    public static Object[] getDetailUserByUsername(String username){
+
+        connection();
+        Object[] rowData = new Object[7];
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT * FROM `vwuseraktif` WHERE `nama_user` = '" + username + "'";
+
+            ResultSet resultData = stmt.executeQuery(query);
+
+            resultData.next();
+
+            rowData[0] = resultData.getInt("id_user");
+            rowData[1] = resultData.getString("nama_user");
+            rowData[2] = resultData.getString("password");
+            rowData[3] = resultData.getString("no_warga_user");
+            rowData[4] = resultData.getString("jabatan_user");
+            rowData[5] = resultData.getInt("total_kas_user");
+            rowData[6] = resultData.getString("s_aktif_user");
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return rowData;
+    }
+
+    public static boolean verifyAkunUser(String username, String password){
+
+        connection();
+        boolean Available = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+
+            String query = "SELECT COUNT(*) FROM `vwuseraktif` WHERE `nama_user` = '" +username+ "' AND `password` = '" +password+"'";
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            if (rs.getInt(1) == 1) {
+                Available = true;
+            }
+            
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Available;
+    }
+
+    public static boolean verifyNoWargaUser(String noWarga){
+
+        connection();
+        boolean Available = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT COUNT(*) FROM `vwuseraktif` WHERE `no_warga_user` =" + noWarga;
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+
+            if (rs.getInt(1) == 0) {
+                Available = true;
+            }
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Available;
+    }
+
+    public static boolean daftarUser(String username,String noWarga,String password){
+
+        connection();
+        boolean status = false;
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "INSERT INTO tbl_user VALUES(NULL,'"+username+"','karyawan',"+noWarga+",'"+password+"',0,'1')";
+
+            if (stmt.executeUpdate(query) > 0) {
+                status = true;
+            }
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
 
 }

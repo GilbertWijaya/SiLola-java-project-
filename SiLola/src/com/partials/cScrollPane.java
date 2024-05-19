@@ -10,7 +10,7 @@ public class cScrollPane extends JScrollPane {
         super(view);
         setBounds(x, y, width, height);
         getViewport().setBackground(cColors.WHITE);
-        setBorder(new LineBorder(cColors.BLUE,2));
+        setBorder(new LineBorder(cColors.BLUE_TABLE_HEADER,2));
 
     }
 

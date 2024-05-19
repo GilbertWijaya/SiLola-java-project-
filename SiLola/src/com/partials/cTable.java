@@ -10,8 +10,8 @@ public class cTable extends JTable {
         super(dm);
         setFont(cFonts.TEXTFIELD_FONT);
         getTableHeader().setFont(cFonts.HEADER_TABLE_FONT);
-        getTableHeader().setBackground(cColors.BLUE);
-        getTableHeader().setForeground(cColors.WHITE);
+        getTableHeader().setBackground(cColors.BLUE_TABLE_HEADER);
+        getTableHeader().setForeground(cColors.BLACK);
         setRowHeight(30);
         getTableHeader().setReorderingAllowed(false);
         setShowVerticalLines(false);

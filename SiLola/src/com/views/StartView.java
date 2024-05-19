@@ -71,6 +71,10 @@ public class StartView extends cStartFrame{
         btnLoginUser.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+
+                
+                String username = txtLoginUsername.getText();
+                String password = String.valueOf(txtLoginPassword.getPassword());
                 
                 if (txtLoginUsername.getText().equalsIgnoreCase("") || String.valueOf(txtLoginPassword.getPassword()).equalsIgnoreCase("")) {
                     
@@ -85,8 +89,19 @@ public class StartView extends cStartFrame{
                         JOptionPane.showMessageDialog(StartView.this, "Password tidak boleh kosong","Peringatan",JOptionPane.WARNING_MESSAGE);
 
                     }
-                }
-                
+                }else{
+
+                    if (Model.verifyAkunUser(username,password)) {
+
+                        Controller.showDashboard(Integer.valueOf(Model.getDetailUserByUsername(username)[0].toString()));
+                        StartView.this.setVisible(false);
+                        //System.out.println("login berhasil");
+                        //System.out.println(Model.verifyAkunUser(username, password));
+                    }else{
+                        JOptionPane.showMessageDialog(StartView.this, "Login gagal, silahkan periksa username dan password anda","error",JOptionPane.ERROR_MESSAGE);
+                        //System.out.println(Model.verifyAkunUser(username, password));
+                    }
+              }
             }
         });
 
@@ -114,6 +129,10 @@ public class StartView extends cStartFrame{
             @Override
             public void actionPerformed(ActionEvent ae) {
 
+                String username = txtDaftarUsername.getText();
+                String noWarga = txtDaftarNIK.getText();
+                String password = String.valueOf(txtDaftarPassword.getPassword());
+
                 if (txtDaftarUsername.getText().equalsIgnoreCase("") || txtDaftarNIK.getText().equalsIgnoreCase("") || String.valueOf(txtDaftarPassword.getPassword()).equalsIgnoreCase("")) {
                     
                     Controller.showDaftarUser();
@@ -132,6 +151,22 @@ public class StartView extends cStartFrame{
                         JOptionPane.showMessageDialog(StartView.this, "Username tidak boleh kosong","Peringatan",JOptionPane.WARNING_MESSAGE);
 
                     }
+                }
+                else{
+
+                    if (Model.verifyNoWargaUser(noWarga)) {
+                        
+                        if (Model.daftarUser(username,noWarga,password)) {
+                            JOptionPane.showMessageDialog(StartView.this, "Data berhasil terdaftar","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                            //initsLoginUser();
+                        }else{
+                            JOptionPane.showMessageDialog(StartView.this, "Data gagal terdaftar","Gagal",JOptionPane.ERROR_MESSAGE);
+                        }
+
+                    }else{
+                        JOptionPane.showMessageDialog(StartView.this, "Silahkan cek kembali data anda","Peringatan",JOptionPane.WARNING_MESSAGE);
+                    }
+
                 }
 
             }
