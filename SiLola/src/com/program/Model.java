@@ -466,7 +466,7 @@ public class Model {
         return rowData;
     }
 
-    public static boolean ubahDataBarang(int idBarang,String nama,String expired,int harga,int stok,String ketSingkat){
+    public static boolean ubahDataBarang(int idBarang,String nama,String expired,int harga,int stok,String pilihan,String ketSingkat){
 
         connection();
         boolean status = false;
@@ -474,7 +474,7 @@ public class Model {
         try {
             
             stmt = conn.createStatement();
-            String query = "UPDATE `tbl_barang` SET tanggal = NOW(),`nama_barang` = '" + nama + "',`harga_satuan` = " + harga + ",`expired_brg` = '" + expired + "',`stok_satuan` = " + stok + ",`keterangan_singkat` = '" + ketSingkat + "' WHERE `id_barang` = " + idBarang;
+            String query = "UPDATE `tbl_barang` SET tanggal = NOW(),`nama_barang` = '" + nama + "',`harga_satuan` = " + harga + ",`expired_brg` = '" + expired + "',`stok_satuan` = " + stok + ",`cash_kredit` = '"+pilihan+"',`keterangan_singkat` = '" + ketSingkat + "' WHERE `id_barang` = " + idBarang;
 
             if (stmt.executeUpdate(query) > 0) {
                 status = true;

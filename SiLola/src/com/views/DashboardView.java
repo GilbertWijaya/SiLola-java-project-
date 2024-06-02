@@ -42,11 +42,14 @@ public class DashboardView extends cDashboardFrame {
     private cLabelInfo labelTotalKas = new cLabelInfo("Total kas", 25, 280);
     private cBigFonts valueTotalKas = new cBigFonts("0", 25, 320);
 
-    private cLabelInfo labelJumlahTotalOmset = new cLabelInfo("Jumlah total omset", 495, 20);
-    private cBigFonts valueJumlahTotalOmset = new cBigFonts("0", 495, 60);
+    //private cLabelInfo labelJumlahTotalOmset = new cLabelInfo("Jumlah total omset", 495, 20);
+    //private cBigFonts valueJumlahTotalOmset = new cBigFonts("0", 495, 60);
 
-    private cLabelInfo labelJumlahBarangExpired = new cLabelInfo("Jumlah barang expired", 495, 150);
-    private cBigFonts valueJumlahBarangExpired = new cBigFonts("0", 495, 190);
+    private cLabelInfo labelJumlahBarangExpired = new cLabelInfo("Jumlah barang expired", 495, 20);
+    private cBigFonts valueJumlahBarangExpired = new cBigFonts("0", 495, 60);
+
+    //private cLabelInfo labelJumlahBarangExpired = new cLabelInfo("Jumlah barang expired", 495, 150);
+    //private cBigFonts valueJumlahBarangExpired = new cBigFonts("0", 495, 190);
 
     private cGreenButton editKasButton = new cGreenButton("Edit kas",130,283,169);
 
@@ -66,7 +69,7 @@ public class DashboardView extends cDashboardFrame {
     private cGreenButton btnHapusDataKeuangan = new cGreenButton("Hapus", 720, 470, 110);
     private cGreenButton btnEditDataKeuangan = new cGreenButton("Edit", 840, 470, 110);
 
-    //komponent edit keuangan
+    //komponent tambah keuangan
     //private cFormLabel labelTanggal = new cFormLabel("Masukan tanggal",25,20,300,false,cColors.BLACK);
     //private cTextFields txtEditTanggal = new cTextFields(25,60,300,false);
 
@@ -88,7 +91,31 @@ public class DashboardView extends cDashboardFrame {
     private cFormLabel labelKeteranganSingkat = new cFormLabel("Masukan Keterangan singkat",25,120,300,false,cColors.BLACK);
     private cTextFields txtEditKeteranganSingkat = new cTextFields(25,150,300,false);
 
-    private cGreenButton btnSimpanKeuangan = new cGreenButton("simpan",840,470,110);
+    private cGreenButton btnSimpanKeuangan = new cGreenButton("Simpan",840,470,110);
+
+    //komponent edit keuangan
+    //private cFormLabel labelTanggal = new cFormLabel("Masukan tanggal",25,20,300,false,cColors.BLACK);
+    //private cTextFields txtEditTanggal = new cTextFields(25,60,300,false);
+
+    //private cFormLabel labelJumlahUang = new cFormLabel("Masukan Jumlah uang",25,100,300,false,cColors.BLACK);
+    //private cTextFields txtEditJumlahUang = new cTextFields(25,135,300,false);
+    private cFormLabel EditLabelJumlahUang = new cFormLabel("Masukan Jumlah uang",25,20,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditJumlahUang = new cTextFields(25,60,300,false);
+
+    //private cRadioButton rdDebet = new cRadioButton("Debet","debet",25, 180, 80);
+    //private cRadioButton rdKredit = new cRadioButton("Kredit","kredit",40, 180, 190);
+    //private javax.swing.ButtonGroup rdPilihanDebetKredit = new javax.swing.ButtonGroup();
+    private cRadioButton EditrdDebet = new cRadioButton("Debet","debet",25, 100, 80);
+    private cRadioButton EditrdKredit = new cRadioButton("Kredit","kredit",40, 100, 190);
+    private javax.swing.ButtonGroup EditrdPilihanDebetKredit = new javax.swing.ButtonGroup();
+    //private ButtonModel buttonModelKeu = new ButtonModel(rdPilihanDebetKredit);
+
+    //private cFormLabel labelKeteranganSingkat = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
+    //private cTextFields txtEditKeteranganSingkat = new cTextFields(25,240,300,false);
+    private cFormLabel EditLabelKeteranganSingkat = new cFormLabel("Masukan Keterangan singkat",25,120,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditKeteranganSingkat = new cTextFields(25,150,300,false);
+
+    private cGreenButton btnUpdateKeuangan = new cGreenButton("Update",840,470,110);
 
     //komponen barang
     private cLabelInfo labelTotalCash = new cLabelInfo("Total Cash : ", 25, 470);
@@ -101,7 +128,7 @@ public class DashboardView extends cDashboardFrame {
     private cGreenButton btnHapusDataBarang = new cGreenButton("Hapus", 720, 470, 110);
     private cGreenButton btnEditDataBarang = new cGreenButton("Edit", 840, 470, 110);
 
-    //komponent edit barang
+    //komponent tambah barang
     private cFormLabel labelTanggalEXPBrg = new cFormLabel("Masukan expired(YYYY-MM-DD)",25,20,300,false,cColors.BLACK);
     private cTextFields txtEditTanggalEXPBrg = new cTextFields(25,60,300,false);
 
@@ -117,12 +144,35 @@ public class DashboardView extends cDashboardFrame {
     private cRadioButton rdCash = new cRadioButton("cash","cash",25, 180, 80);
     private cRadioButton rdKreditBrg = new cRadioButton("kredit","kredit",40, 180, 190);
     private javax.swing.ButtonGroup rdPilihanCashKredit = new javax.swing.ButtonGroup();
+    private cGreenButton btnSimpanBarang = new cGreenButton("Simpan",840,470,110);
+    
+    private cFormLabel TambahLabelKeteranganSingkatBrg = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
+    private cTextFields TambahTxtKeteranganSingkatBrg = new cTextFields(25,240,300,false);
+
     //private javax.swing.ButtonGroup rdPilihanCashKredit;
 
-    private cFormLabel labelKeteranganSingkatBrg = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
-    private cTextFields txtEditKeteranganSingkatBrg = new cTextFields(25,240,300,false);
+    //komponent edit barang
+    private cFormLabel EditLabelTanggalEXPBrg = new cFormLabel("Masukan expired(YYYY-MM-DD)",25,20,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditTanggalEXPBrg = new cTextFields(25,60,300,false);
 
-    private cGreenButton btnSimpanBarang = new cGreenButton("simpan",840,470,110);
+    private cFormLabel EditLabelHargaBrg = new cFormLabel("Masukan harga satuan barang",400,20,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditHargaBrg = new cTextFields(400,60,300,false);
+
+    private cFormLabel EditLabelNamaBarang = new cFormLabel("Masukan nama barang",25,100,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditNamaBarang = new cTextFields(25,135,300,false);
+
+    private cFormLabel EditLabelStokSatuan = new cFormLabel("Masukan jumlah stok satuan",400,100,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditStokBarang = new cTextFields(400,135,300,false);
+
+    private cRadioButton EditrdCash = new cRadioButton("cash","cash",25, 180, 80);
+    private cRadioButton EditrdKreditBrg = new cRadioButton("kredit","kredit",40, 180, 190);
+    private javax.swing.ButtonGroup EditrdPilihanCashKredit = new javax.swing.ButtonGroup();
+    //private javax.swing.ButtonGroup rdPilihanCashKredit;
+
+    private cFormLabel EditLabelKeteranganSingkatBrg = new cFormLabel("Masukan Keterangan singkat",25,210,300,false,cColors.BLACK);
+    private cTextFields EditTxtEditKeteranganSingkatBrg = new cTextFields(25,240,300,false);
+
+    private cGreenButton btnUpdateBarang = new cGreenButton("Update",840,470,110);
 
     //method reset sidebar
     private void resetSideBar(){
@@ -268,8 +318,8 @@ public class DashboardView extends cDashboardFrame {
         });
 
         content.add(valueTotalKas);
-        content.add(labelJumlahTotalOmset);
-        content.add(valueJumlahTotalOmset);
+        //content.add(labelJumlahTotalOmset);
+        //content.add(valueJumlahTotalOmset);
         content.add(labelJumlahBarangExpired);
         content.add(valueJumlahBarangExpired);
         setVisible(true);
@@ -515,27 +565,27 @@ public class DashboardView extends cDashboardFrame {
         Object[] detailKeuangan = Model.getDetailKeuangan(id_keuangan);
 
         //txtEditTanggal.setText(detailKeuangan[1].toString());
-        txtEditJumlahUang.setText(detailKeuangan[2].toString());
-        txtEditKeteranganSingkat.setText(detailKeuangan[4].toString());
+        EditTxtEditJumlahUang.setText(detailKeuangan[2].toString());
+        EditTxtEditKeteranganSingkat.setText(detailKeuangan[4].toString());
 
         String pilihan = detailKeuangan[3].toString();
         if (pilihan.equalsIgnoreCase("debet")) {
-            rdDebet.setSelected(true);
+            EditrdDebet.setSelected(true);
         }else{
-            rdKredit.setSelected(true);
+            EditrdKredit.setSelected(true);
         }
 
-        btnSimpanKeuangan.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateKeuangan.addActionListener(new java.awt.event.ActionListener() {
            
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if (txtEditJumlahUang.getText().trim().isEmpty() /*|| txtEditTanggal.getText().trim().isEmpty()*/
-                || /*rdPilihanDebetKredit.getSelection().equals()*/  txtEditKeteranganSingkat.getText().trim().isEmpty() ) {
+                if (EditTxtEditJumlahUang.getText().trim().isEmpty() /*|| txtEditTanggal.getText().trim().isEmpty()*/
+                || /*rdPilihanDebetKredit.getSelection().equals()*/  EditTxtEditKeteranganSingkat.getText().trim().isEmpty() ) {
                     
                     DashboardView.this.setVisible(false);
 
-                    if (txtEditJumlahUang.getText().trim().isEmpty()) {
+                    if (EditTxtEditJumlahUang.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan jumlah uang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     // if (txtEditTanggal.getText().trim().isEmpty()) {
@@ -544,7 +594,7 @@ public class DashboardView extends cDashboardFrame {
                     // if (rdPilihanDebetKredit.getSelection().equals("")) {
                     //     JOptionPane.showMessageDialog(DashboardView.this, "Masukan pilihan terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     // }
-                    if (txtEditKeteranganSingkat.getText().trim().isEmpty()) {
+                    if (EditTxtEditKeteranganSingkat.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan keterangan singkat terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
 
@@ -554,9 +604,11 @@ public class DashboardView extends cDashboardFrame {
                 else{
 
                     //String tanggal = txtEditTanggal.getText();
-                    int jumlahUang = Integer.parseInt(txtEditJumlahUang.getText());
-                    String pilihan = rdPilihanDebetKredit.getSelection().getActionCommand();
-                    String keteranganSingkat = txtEditKeteranganSingkat.getText();
+                    int jumlahUang = Integer.parseInt(EditTxtEditJumlahUang.getText());
+                    EditrdPilihanDebetKredit.add(EditrdDebet);
+                    EditrdPilihanDebetKredit.add(EditrdKredit);
+                    String pilihan = EditrdPilihanDebetKredit.getSelection().getActionCommand();
+                    String keteranganSingkat = EditTxtEditKeteranganSingkat.getText();
                     //System.out.println(pilihan);
                     if (Model.ubahDataKeuangan(id_keuangan,pilihan, jumlahUang, keteranganSingkat)) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Ubah data berhasil","Berhasil",JOptionPane.INFORMATION_MESSAGE);
@@ -575,13 +627,13 @@ public class DashboardView extends cDashboardFrame {
         menuKeuangan.setSideBarAktif();
         //content.add(labelTanggal);
         //content.add(txtEditTanggal);
-        content.add(labelJumlahUang);
-        content.add(txtEditJumlahUang);
-        content.add(rdDebet);
-        content.add(rdKredit);
-        content.add(labelKeteranganSingkat);
-        content.add(txtEditKeteranganSingkat);
-        content.add(btnSimpanKeuangan);
+        content.add(EditLabelJumlahUang);
+        content.add(EditTxtEditJumlahUang);
+        content.add(EditrdDebet);
+        content.add(EditrdKredit);
+        content.add(EditLabelKeteranganSingkat);
+        content.add(EditTxtEditKeteranganSingkat);
+        content.add(btnUpdateKeuangan);
         setVisible(true);
     }
 
@@ -709,7 +761,7 @@ public class DashboardView extends cDashboardFrame {
                 
                 if (txtEditHargaBrg.getText().trim().isEmpty() || txtEditNamaBarang.getText().trim().isEmpty()
                 || txtEditStokBarang.getText().trim().isEmpty() || txtEditTanggalEXPBrg.getText().trim().isEmpty()
-                || txtEditKeteranganSingkatBrg.getText().trim().isEmpty() || rdPilihanCashKredit.getSelection().getActionCommand().equals(null)) {
+                || TambahTxtKeteranganSingkatBrg.getText().trim().isEmpty() || rdPilihanCashKredit.getSelection().getActionCommand().equals(null)) {
                     
                     DashboardView.this.setVisible(false);
 
@@ -725,7 +777,7 @@ public class DashboardView extends cDashboardFrame {
                     if (txtEditStokBarang.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this,"Masukan stok barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
                     }
-                    if (txtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
+                    if (TambahTxtKeteranganSingkatBrg.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this,"Masukan keterangan barang terlebih dahulu" ,"Error",JOptionPane.ERROR_MESSAGE);
                     }
                     if (rdPilihanCashKredit.getSelection().getActionCommand().equals(null)) {
@@ -739,7 +791,7 @@ public class DashboardView extends cDashboardFrame {
                     String expiredBrg = txtEditTanggalEXPBrg.getText();
                     int hargaBrg = Integer.parseInt(txtEditHargaBrg.getText());
                     int stokBrg = Integer.parseInt(txtEditStokBarang.getText());
-                    String keteranganSingkatBrg = txtEditKeteranganSingkatBrg.getText();
+                    String keteranganSingkatBrg = TambahTxtKeteranganSingkatBrg.getText();
                     String pilihanCashKredit = rdPilihanCashKredit.getSelection().getActionCommand();
                     int totalbrg = hargaBrg * stokBrg;
 
@@ -769,14 +821,16 @@ public class DashboardView extends cDashboardFrame {
         content.add(txtEditStokBarang);
         content.add(rdCash);
         content.add(rdKreditBrg);
-        content.add(labelKeteranganSingkatBrg);
-        content.add(txtEditKeteranganSingkatBrg);
+        content.add(TambahLabelKeteranganSingkatBrg);
+        content.add(TambahTxtKeteranganSingkatBrg);
         content.add(btnSimpanBarang);
         setVisible(true);
 
     }
 
     private void initsEditBarang(int idBarang){
+
+        
 
         idSelected = null;
         resetSideBar();
@@ -788,44 +842,48 @@ public class DashboardView extends cDashboardFrame {
 
         Object[] dataBarang = Model.getDetailBarang(idBarang);
 
-        txtEditTanggalEXPBrg.setText(dataBarang[4].toString());
-        txtEditHargaBrg.setText(dataBarang[3].toString());
-        txtEditNamaBarang.setText(dataBarang[2].toString());
-        txtEditStokBarang.setText(dataBarang[5].toString());
-        txtEditKeteranganSingkatBrg.setText(dataBarang[8].toString());
+        EditTxtEditTanggalEXPBrg.setText(dataBarang[4].toString());
+        EditTxtEditHargaBrg.setText(dataBarang[3].toString());
+        EditTxtEditNamaBarang.setText(dataBarang[2].toString());
+        EditTxtEditStokBarang.setText(dataBarang[5].toString());
+        EditTxtEditKeteranganSingkatBrg.setText(dataBarang[8].toString());
+
+        
         
         String pilihan = dataBarang[6].toString();
         if (pilihan.equalsIgnoreCase("cash")) {
-            rdCash.setSelected(true);
+            EditrdCash.setSelected(true);
+            EditrdKreditBrg.setSelected(false);
         }else{
-            rdKreditBrg.setSelected(true);
+            EditrdKreditBrg.setSelected(true);
+            EditrdCash.setSelected(false);
         }
         
 
-        btnSimpanBarang.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateBarang.addActionListener(new java.awt.event.ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                if (txtEditNamaBarang.getText().trim().isEmpty() || txtEditTanggalEXPBrg.getText().trim().isEmpty()
-                || txtEditStokBarang.getText().trim().isEmpty() || txtEditHargaBrg.getText().trim().isEmpty()
-                || txtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
+                if (EditTxtEditNamaBarang.getText().trim().isEmpty() || EditTxtEditTanggalEXPBrg.getText().trim().isEmpty()
+                || EditTxtEditStokBarang.getText().trim().isEmpty() || EditTxtEditHargaBrg.getText().trim().isEmpty()
+                || EditTxtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
                     
                     DashboardView.this.setVisible(false);
 
-                    if (txtEditNamaBarang.getText().trim().isEmpty()) {
+                    if (EditTxtEditNamaBarang.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan nama barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
-                    if (txtEditTanggalEXPBrg.getText().trim().isEmpty()) {
+                    if (EditTxtEditTanggalEXPBrg.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan tanggal expired terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
-                    if (txtEditStokBarang.getText().trim().isEmpty()) {
+                    if (EditTxtEditStokBarang.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan Stok barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
-                    if (txtEditHargaBrg.getText().trim().isEmpty()) {
+                    if (EditTxtEditHargaBrg.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan harga barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
-                    if (txtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
+                    if (EditTxtEditKeteranganSingkatBrg.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(DashboardView.this, "Masukan keterangan singkat barang terlebih dahulu","Error",JOptionPane.ERROR_MESSAGE);
                     }
                     DashboardView.this.setVisible(true);
@@ -833,13 +891,16 @@ public class DashboardView extends cDashboardFrame {
                 }
                 else{
 
-                    String nama = txtEditNamaBarang.getText();
-                    String expired = txtEditTanggalEXPBrg.getText();
-                    int harga = Integer.parseInt(txtEditHargaBrg.getText());
-                    int stok = Integer.parseInt(txtEditStokBarang.getText());
-                    String keteranganSingkat = txtEditKeteranganSingkatBrg.getText();
+                    String nama = EditTxtEditNamaBarang.getText();
+                    String expired = EditTxtEditTanggalEXPBrg.getText();
+                    int harga = Integer.parseInt(EditTxtEditHargaBrg.getText());
+                    int stok = Integer.parseInt(EditTxtEditStokBarang.getText());
+                    String keteranganSingkat = EditTxtEditKeteranganSingkatBrg.getText();
+                    EditrdPilihanCashKredit.add(EditrdCash);
+                    EditrdPilihanCashKredit.add(EditrdKreditBrg);
+                    String EditpilihanCashKredit = EditrdPilihanCashKredit.getSelection().getActionCommand();
 
-                    if (Model.ubahDataBarang(idBarang,nama,expired,harga,stok,keteranganSingkat)) {
+                    if (Model.ubahDataBarang(idBarang,nama,expired,harga,stok,EditpilihanCashKredit,keteranganSingkat)) {
                         JOptionPane.showMessageDialog(DashboardView.this,"Data barang berhasil diubah","Berhasil",JOptionPane.INFORMATION_MESSAGE);
                         initsBarang();
                     }
@@ -854,19 +915,20 @@ public class DashboardView extends cDashboardFrame {
         });
 
         menuKeuangan.setSideBarAktif();
-        content.add(labelTanggalEXPBrg);
-        content.add(txtEditTanggalEXPBrg);
-        content.add(labelHargaBrg);
-        content.add(txtEditHargaBrg);
-        content.add(labelNamaBarang);
-        content.add(txtEditNamaBarang);
-        content.add(labelStokSatuan);
-        content.add(txtEditStokBarang);
-        content.add(rdCash);
-        content.add(rdKreditBrg);
-        content.add(labelKeteranganSingkatBrg);
-        content.add(txtEditKeteranganSingkatBrg);
-        content.add(btnSimpanBarang);
+        content.add(EditLabelTanggalEXPBrg);
+        content.add(EditTxtEditTanggalEXPBrg);
+        content.add(EditLabelHargaBrg);
+        content.add(EditTxtEditHargaBrg);
+        content.add(EditLabelNamaBarang);
+        content.add(EditTxtEditNamaBarang);
+        content.add(EditLabelStokSatuan);
+        content.add(EditTxtEditStokBarang);
+        content.add(EditrdCash);
+        content.add(EditrdKreditBrg);
+        
+        content.add(EditLabelKeteranganSingkatBrg);
+        content.add(EditTxtEditKeteranganSingkatBrg);
+        content.add(btnUpdateBarang);
         setVisible(true);
 
     }
