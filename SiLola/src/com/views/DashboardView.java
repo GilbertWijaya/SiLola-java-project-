@@ -387,8 +387,8 @@ public class DashboardView extends cDashboardFrame {
 
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-                int selectedIndex = tblDataKeuangan.getSelectedRow();
-                int idKeuangan = Integer.parseInt(tblDataKeuangan.getValueAt(selectedIndex, 0).toString());
+                //int selectedIndex = tblDataKeuangan.getSelectedRow();
+                //int idKeuangan = Integer.parseInt(tblDataKeuangan.getValueAt(selectedIndex, 0).toString());
                 
             }
 
@@ -800,7 +800,7 @@ public class DashboardView extends cDashboardFrame {
                         initsBarang();
                     }
                     else{
-                        JOptionPane.showMessageDialog(DashboardView.this, "Data barang berhasil ditambahkan","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(DashboardView.this, "Data barang gagal ditambahkan","gagal",JOptionPane.INFORMATION_MESSAGE);
 
                     }
 
