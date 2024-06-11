@@ -298,7 +298,7 @@ public class DashboardView extends cDashboardFrame {
         valueJumlahItemBarang.setText(String.valueOf(Model.getCountAllBrg()));
         valueJumlahTotalBarang.setText(String.valueOf(Model.getCountAllTotalBrg()));
         valueJumlahBarangExpired.setText(String.valueOf(Model.getCountExpBrgAktif()));
-        valueTotalKas.setText(String.valueOf(Model.getDetailUser(idUser)[5]));
+        valueTotalKas.setText(String.valueOf(Model.getKasUser(idUser)));
 
         menuBeranda.setSideBarAktif();
         content.add(labelJumlahItemBarang);

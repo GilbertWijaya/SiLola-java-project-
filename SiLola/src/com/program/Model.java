@@ -63,6 +63,30 @@ public class Model {
         return rowData;
     }
 
+    public static String getKasUser(int idUser){
+
+        connection();
+        String kas = "";
+
+        try {
+            
+            stmt = conn.createStatement();
+            String query = "SELECT REPLACE(FORMAT(`total_kas_user`,0),',','.') FROM `vwuseraktif` WHERE `vwuseraktif`.`id_user` = " + idUser;
+
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
+            kas = rs.getString(1);
+
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return kas;
+    }
+    
     public static int getCountAllBrg(){
 
         connection();
@@ -87,19 +111,20 @@ public class Model {
         return count;
     }
 
-    public static int getCountAllTotalBrg(){
+    public static String getCountAllTotalBrg(){
 
         connection();
-        int count = 0;
+        String count = "";
 
         try {
 
             stmt = conn.createStatement();
-            String query = "SELECT SUM(total_barang) FROM vwallbrgaktif";
+            //String query = "SELECT SUM(total_barang) FROM vwallbrgaktif";
+            String query = "SELECT REPLACE(FORMAT(SUM(`vwallbrgaktif`.`total_barang`),0),',','.') FROM `vwallbrgaktif`";
 
             ResultSet rs = stmt.executeQuery(query);
             rs.next();
-            count = rs.getInt(1);
+            count = rs.getString(1);
 
             stmt.close();
             conn.close();
@@ -220,21 +245,21 @@ public class Model {
         return tm;
     }
 
-    public static int getJumlahKeuDebet(){
+    public static String getJumlahKeuDebet(){
 
         connection();
-        int count = 0;
+        String count = "";
 
         try {
             
             stmt = conn.createStatement();
-            String query = "SELECT SUM(`jumlah_uang`) FROM `vwkeudebetaktif`";
+            String query = "SELECT REPLACE(FORMAT(SUM(`jumlah_uang`),0),',','.') FROM `vwkeudebetaktif`";
 
             ResultSet rs = stmt.executeQuery(query);
 
             rs.next();
 
-            count = rs.getInt(1);
+            count = rs.getString(1);
 
             stmt.close();
             conn.close();
@@ -272,21 +297,21 @@ public class Model {
         return count;
     }
 
-    public static int getTotalBrgCash(){
+    public static String getTotalBrgCash(){
 
         connection();
-        int count = 0;
+        String count = "";
 
         try {
             
             stmt = conn.createStatement();
-            String query = "SELECT SUM(`total_barang`) FROM `vwbrgcashaktif`";
+            String query = "SELECT REPLACE(FORMAT(SUM(`total_barang`),0),',','.') FROM `vwbrgcashaktif`";
 
             ResultSet rs = stmt.executeQuery(query);
 
             rs.next();
 
-            count = rs.getInt(1);
+            count = rs.getString(1);
 
             stmt.close();
             conn.close();
